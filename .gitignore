@@ -21,6 +21,8 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+.idea
+Panigale.framework.zip
 
 ## Obj-C/Swift specific
 *.hmap
