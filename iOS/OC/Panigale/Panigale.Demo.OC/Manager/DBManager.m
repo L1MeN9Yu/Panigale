@@ -38,7 +38,7 @@
 
 - (PanigaleDB *)db {
     if (!_db) {
-        _db = [[PanigaleDB alloc] initWithPath:NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES).firstObject andName:@"panigale"];
+        _db = [[PanigaleDB alloc] initWithPath:NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES).firstObject name:@"panigale"];
     }
     return _db;
 }

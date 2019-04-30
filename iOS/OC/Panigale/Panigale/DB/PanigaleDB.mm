@@ -84,37 +84,37 @@ LevelDBOptions MakeLevelDBOptions() {
     return MakeLevelDBOptions();
 }
 
-- (instancetype)initWithPath:(NSString *)path andName:(NSString *)name {
+- (instancetype)initWithPath:(NSString *)path name:(NSString *)name {
     LevelDBOptions opts = MakeLevelDBOptions();
-    return [self initWithPath:path name:name andOptions:opts];
+    return [self initWithPath:path name:name options:opts];
 }
 
-- (instancetype)initWithPath:(NSString *)path name:(NSString *)name andOptions:(LevelDBOptions)opts {
+- (instancetype)initWithPath:(NSString *)path name:(NSString *)name options:(LevelDBOptions)options {
     if (self = [super init]) {
         _name = [name copy];
         _path = [path copy];
 
-        leveldb::Options options;
+        leveldb::Options leveldb_options;
 
-        options.create_if_missing = opts.createIfMissing;
-        options.paranoid_checks = opts.paranoidCheck;
-        options.error_if_exists = opts.errorIfExists;
+        leveldb_options.create_if_missing = options.createIfMissing;
+        leveldb_options.paranoid_checks = options.paranoidCheck;
+        leveldb_options.error_if_exists = options.errorIfExists;
 
-        if (!opts.compression)
-            options.compression = leveldb::kNoCompression;
+        if (!leveldb_options.compression)
+            leveldb_options.compression = leveldb::kNoCompression;
 
-        if (opts.cacheSize > 0) {
-            options.block_cache = leveldb::NewLRUCache(opts.cacheSize);
-            cache = options.block_cache;
+        if (options.cacheSize > 0) {
+            leveldb_options.block_cache = leveldb::NewLRUCache(options.cacheSize);
+            cache = leveldb_options.block_cache;
         } else
             readOptions.fill_cache = false;
 
-        if (opts.createIntermediateDirectories) {
-            NSString *dirpath = [path stringByDeletingLastPathComponent];
+        if (options.createIntermediateDirectories) {
+            NSString *dirPath = [path stringByDeletingLastPathComponent];
             NSFileManager *fm = [NSFileManager defaultManager];
             NSError *crError;
 
-            BOOL success = [fm createDirectoryAtPath:dirpath
+            BOOL success = [fm createDirectoryAtPath:dirPath
                          withIntermediateDirectories:true
                                           attributes:nil
                                                error:&crError];
@@ -124,11 +124,11 @@ LevelDBOptions MakeLevelDBOptions() {
             }
         }
 
-        if (opts.filterPolicy > 0) {
-            filterPolicy = leveldb::NewBloomFilterPolicy(opts.filterPolicy);;
-            options.filter_policy = filterPolicy;
+        if (options.filterPolicy > 0) {
+            filterPolicy = leveldb::NewBloomFilterPolicy(options.filterPolicy);;
+            leveldb_options.filter_policy = filterPolicy;
         }
-        leveldb::Status status = leveldb::DB::Open(options, [_path UTF8String], &_db);
+        leveldb::Status status = leveldb::DB::Open(leveldb_options, [_path UTF8String], &_db);
 
         readOptions.fill_cache = true;
         writeOptions.sync = false;
@@ -158,12 +158,12 @@ LevelDBOptions MakeLevelDBOptions() {
 
 + (instancetype)databaseInLibraryWithName:(NSString *)name {
     LevelDBOptions options = MakeLevelDBOptions();
-    return [self databaseInLibraryWithName:name andOptions:options];
+    return [self databaseInLibraryWithName:name options:options];
 }
 
-+ (instancetype)databaseInLibraryWithName:(NSString *)name andOptions:(LevelDBOptions)opts {
++ (instancetype)databaseInLibraryWithName:(NSString *)name options:(LevelDBOptions)options {
     NSString *path = [GetLibraryPath() stringByAppendingPathComponent:name];
-    PanigaleDB *levelDBWrapper = [[self alloc] initWithPath:path name:name andOptions:opts];
+    PanigaleDB *levelDBWrapper = [[self alloc] initWithPath:path name:name options:options];
     return levelDBWrapper;
 }
 

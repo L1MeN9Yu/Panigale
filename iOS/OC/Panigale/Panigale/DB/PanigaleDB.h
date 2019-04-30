@@ -46,6 +46,7 @@ extern "C" {
 #endif
 
 NSString *NSStringFromLevelDBKey(LevelDBKey *key);
+
 NSData *NSDataFromLevelDBKey(LevelDBKey *key);
 
 #ifdef __cplusplus
@@ -70,17 +71,17 @@ NSData *NSDataFromLevelDBKey(LevelDBKey *key);
 /**
  A boolean value indicating whether write operations should be synchronous (flush to disk before returning).
  */
-@property (nonatomic) BOOL safe;
+@property (nonatomic, assign) BOOL safe;
 
 /**
  A boolean value indicating whether read operations should try to use the configured cache (defaults to true).
  */
-@property (nonatomic) BOOL useCache;
+@property (nonatomic, assign) BOOL useCache;
 
 /**
  A boolean readonly value indicating whether the database is closed or not.
  */
-@property (readonly) BOOL closed;
+@property (nonatomic, assign, readonly) BOOL closed;
 
 /**
  The data encoding block.
@@ -108,9 +109,9 @@ NSData *NSDataFromLevelDBKey(LevelDBKey *key);
  A class method that returns an autoreleased instance of LevelDB with the given name and options, inside the Library folder
 
  @param name The database's filename
- @param opts A LevelDBOptions struct with options for fine tuning leveldb
+ @param options A LevelDBOptions struct with options for fine tuning leveldb
  */
-+ (instancetype)databaseInLibraryWithName:(NSString *)name andOptions:(LevelDBOptions)opts;
++ (instancetype)databaseInLibraryWithName:(NSString *)name options:(LevelDBOptions)options;
 
 /**
  Initialize a leveldb instance
@@ -118,16 +119,16 @@ NSData *NSDataFromLevelDBKey(LevelDBKey *key);
  @param path The parent directory of the database file on disk
  @param name the filename of the database file on disk
  */
-- (instancetype)initWithPath:(NSString *)path andName:(NSString *)name;
+- (instancetype)initWithPath:(NSString *)path name:(NSString *)name;
 
 /**
  Initialize a leveldb instance
 
  @param path The parent directory of the database file on disk
  @param name the filename of the database file on disk
- @param opts A LevelDBOptions struct with options for fine tuning leveldb
+ @param options A LevelDBOptions struct with options for fine tuning leveldb
  */
-- (instancetype)initWithPath:(NSString *)path name:(NSString *)name andOptions:(LevelDBOptions)opts;
+- (instancetype)initWithPath:(NSString *)path name:(NSString *)name options:(LevelDBOptions)options;
 
 /**
  Delete the database file on disk
