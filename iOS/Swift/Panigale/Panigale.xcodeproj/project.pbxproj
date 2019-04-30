@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		109E2D9D2272EB6C001F207A /* Panigale.h in Headers */ = {isa = PBXBuildFile; fileRef = 109E2D9B2272EB6C001F207A /* Panigale.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		109E2DA52272EC1F001F207A /* libleveldb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 109E2DA42272EC1F001F207A /* libleveldb.a */; };
+		B2D2A70946B3439E03E5003E /* panigale_db.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D2AF226167AE94FCEB2CFA /* panigale_db.h */; };
+		B2D2AEACC6E33679237587B3 /* panigale_db.c in Sources */ = {isa = PBXBuildFile; fileRef = B2D2AA60A03DD3BBFCD38B95 /* panigale_db.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +18,8 @@
 		109E2D9B2272EB6C001F207A /* Panigale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Panigale.h; sourceTree = "<group>"; };
 		109E2D9C2272EB6C001F207A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		109E2DA42272EC1F001F207A /* libleveldb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libleveldb.a; path = ExternalLibrary/library/libleveldb.a; sourceTree = "<group>"; };
+		B2D2AA60A03DD3BBFCD38B95 /* panigale_db.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = panigale_db.c; sourceTree = "<group>"; };
+		B2D2AF226167AE94FCEB2CFA /* panigale_db.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = panigale_db.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +56,8 @@
 			children = (
 				109E2D9B2272EB6C001F207A /* Panigale.h */,
 				109E2D9C2272EB6C001F207A /* Info.plist */,
+				B2D2A2548A01BBDB197C56D6 /* DB */,
+				B2D2A37BB83449FA09220E95 /* Core */,
 			);
 			path = Panigale;
 			sourceTree = "<group>";
@@ -64,6 +70,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B2D2A2548A01BBDB197C56D6 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		B2D2A37BB83449FA09220E95 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B2D2AF226167AE94FCEB2CFA /* panigale_db.h */,
+				B2D2AA60A03DD3BBFCD38B95 /* panigale_db.c */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -72,6 +94,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				109E2D9D2272EB6C001F207A /* Panigale.h in Headers */,
+				B2D2A70946B3439E03E5003E /* panigale_db.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D2AEACC6E33679237587B3 /* panigale_db.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
